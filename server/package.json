@@ -1,0 +1,38 @@
+{
+  "name": "batta",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10",
+    "puppeteer": "^1.13.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.1",
+    "swagger-jsdoc": "^3.2.7",
+    "swagger-ui-express": "^4.0.2"
+  },
+  "scripts": {
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 8
+    },
+    "env": {
+      "node": true,
+      "es6": true,
+      "browser": true
+    },
+    "rules": {
+      "no-console": 0,
+      "no-unused-vars": 1
+    }
+  }
+}

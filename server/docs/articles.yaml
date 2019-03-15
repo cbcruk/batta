@@ -1,0 +1,128 @@
+paths:
+  /articles/:
+    get:
+      tags:
+        - 'articles'
+      summary: 'Return articles'
+      produces:
+        - application/json
+      parameters:
+        - name: 'is_hot'
+          in: 'query'
+          description: 'Whether or not to fetch the entire listing'
+          required: false
+          type: 'boolean'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/ArticleList'
+  /articles/${articleId}:
+    get:
+      tags:
+        - 'articles'
+      summary: 'Find article by ID'
+      description: 'Returns a single article'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'articleId'
+          in: 'path'
+          description: 'ID of article to return'
+          required: true
+          type: 'string'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/ArticleDetail'
+definitions:
+  ArticleSummary:
+    type: 'object'
+    properties:
+      id:
+        type: 'string'
+      image:
+        type: 'string'
+      title:
+        type: 'string'
+      region:
+        type: 'string'
+      price:
+        type: 'integer'
+      interest:
+        type: 'integer'
+      reply:
+        type: 'integer'
+      chat:
+        type: 'integer'
+  ArticleList:
+    type: 'array'
+    items:
+      $ref: '#/definitions/ArticleSummary'
+  ArticleDetail:
+    type: 'object'
+    properties:
+      user:
+        type: 'object'
+        properties:
+          name:
+            type: 'string'
+          region:
+            type: 'string'
+          avatar:
+            type: 'string'
+          temperature:
+            type: 'string'
+      item:
+        type: 'object'
+        properties:
+          title:
+            type: 'string'
+          status:
+            type: 'string'
+          price:
+            type: 'integer'
+          desc:
+            type: 'string'
+          images:
+            type: 'array'
+            items:
+              type: 'string'
+          category:
+            type: 'string'
+          time:
+            type: 'string'
+          interest:
+            type: 'integer'
+          reply:
+            type: 'integer'
+          chat:
+            type: 'integer'
+      comment:
+        type: 'object'
+        properties:
+          total:
+            type: 'string'
+          items:
+            type: 'array'
+            items:
+              properties:
+                user_name:
+                  type: 'string'
+                user_id:
+                  type: 'string'
+                user_region:
+                  type: 'string'
+                desc:
+                  type: 'string'
+                time:
+                  type: 'string'
+      related:
+        type: 'array'
+        items:
+          $ref: '#/definitions/ArticleSummary'
+      near:
+        type: 'array'
+        items:
+          $ref: '#/definitions/ArticleSummary'

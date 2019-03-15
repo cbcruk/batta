@@ -1,0 +1,72 @@
+paths:
+  /users/${userId}:
+    get:
+      tags:
+        - 'users'
+      summary: 'Return user info by ID'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'userId'
+          in: 'path'
+          description: 'User ID to return'
+          required: true
+          type: 'string'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/User'
+definitions:
+  Personal:
+    type: 'object'
+    properties:
+      name:
+        type: 'string'
+      region:
+        type: 'string'
+      avatar:
+        type: 'string'
+      temperature:
+        type: 'string'
+  Counts:
+    type: 'array'
+    items:
+      type: 'string'
+  Manner:
+    type: 'object'
+    properties:
+      content:
+        type: 'string'
+      count:
+        type: 'string'
+  Review:
+    type: 'object'
+    properties:
+      avatar:
+        type: 'string'
+      name:
+        type: 'string'
+      region:
+        type: 'string'
+      content:
+        type: 'string'
+      time:
+        type: 'string'
+  User:
+    type: 'object'
+    properties:
+      personal:
+        $ref: '#/definitions/Personal'
+      items:
+        $ref: '#/definitions/ArticleList'
+      counts:
+        $ref: '#/definitions/Counts'
+      manners:
+        type: 'array'
+        items:
+          $ref: '#/definitions/Manner'
+      reviews:
+        type: 'array'
+        items:
+          $ref: '#/definitions/Review'
