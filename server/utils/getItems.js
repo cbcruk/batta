@@ -17,7 +17,7 @@ function getItems(selector) {
     const price = parseInt(
       find(PRICE_SELECTOR).innerText.replace(/\D/g, ''),
       10
-    )
+    ) || '무료나눔'
     const [interest, reply, chat] = [...findAll(COUNTS_SELECTOR)].map(span =>
       parseInt(span.innerText.replace(/\D/g, ''), 10)
     )
