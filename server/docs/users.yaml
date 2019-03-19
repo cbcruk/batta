@@ -1,5 +1,5 @@
 paths:
-  /users/${userId}:
+  /users/{userId}:
     get:
       tags:
         - 'users'
