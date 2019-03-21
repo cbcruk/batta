@@ -26,17 +26,22 @@ function articles() {
     const user = await page.evaluate(() => {
       const find = document.querySelector.bind(document)
 
+      const ID_SELECTOR = '#article-profile-link'
       const NAME_SELECTOR = '#nickname'
       const REGION_SELECTOR = '#region-name'
       const AVATAR_SELECTOR = '#article-profile-image > img'
       const TEMPERATURE_SELECTOR = '#temperature-wrap dd'
 
+      const id = find(ID_SELECTOR)
+        .getAttribute('href')
+        .replace('/users/', '')
       const name = find(NAME_SELECTOR).innerText
       const region = find(REGION_SELECTOR).innerText
       const avatar = find(AVATAR_SELECTOR).getAttribute('src')
       const temperature = find(TEMPERATURE_SELECTOR).innerText
 
       return {
+        id,
         name,
         region,
         avatar,
