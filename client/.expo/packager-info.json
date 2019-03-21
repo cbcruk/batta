@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": "https://dt-s4s.anonymous.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.dt-s4s.anonymous.client.exp.direct",
+  "ngrokPid": 51587,
+  "webpackServerPort": null
+}
