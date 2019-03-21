@@ -1,0 +1,61 @@
+paths:
+  /address:
+    get:
+      tags:
+        - 'address'
+      summary: 'Return address'
+      produces:
+        - application/json
+      parameters:
+        - name: 'x'
+          in: 'query'
+          description: 'longitude'
+          required: true
+          type: 'number'
+        - name: 'y'
+          in: 'query'
+          description: 'latitude'
+          required: true
+          type: 'number'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/Address'
+  /address/{keyword}:
+    get:
+      tags:
+        - 'address'
+      summary: 'Find address by keyword'
+      description: 'Returns a address'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'keyword'
+          in: 'path'
+          description: 'Keyword of address to return'
+          required: true
+          type: 'string'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/Address'
+definitions:
+  Address:
+    type: 'object'
+    properties:
+      items:
+        type: 'array'
+        items:
+          properties:
+            address_name:
+              type: 'string'
+            region1:
+              type: 'string'
+            region2:
+              type: 'string'
+            region3:
+              type: 'string'
+            code:
+              type: 'string'

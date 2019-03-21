@@ -1,5 +1,5 @@
 paths:
-  /articles/:
+  /articles:
     get:
       tags:
         - 'articles'
