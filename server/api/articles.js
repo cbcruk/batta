@@ -34,7 +34,7 @@ function articles() {
       const name = find(NAME_SELECTOR).innerText
       const region = find(REGION_SELECTOR).innerText
       const avatar = find(AVATAR_SELECTOR).getAttribute('src')
-      const temperature = find(TEMPERATURE_SELECTOR).innerTex
+      const temperature = find(TEMPERATURE_SELECTOR).innerText
 
       return {
         name,
