@@ -1,0 +1,6 @@
+exports.USER_SELECTOR = '#article-profile'
+exports.ID_SELECTOR = '#article-profile-link'
+exports.AVATAR_SELECTOR = '#article-profile-image > img'
+exports.NAME_SELECTOR = '#nickname'
+exports.REGION_SELECTOR = '#region-name'
+exports.TEMPERATURE_SELECTOR = '#temperature-wrap dd'

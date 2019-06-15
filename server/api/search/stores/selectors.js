@@ -1,0 +1,8 @@
+exports.ITEMS_SELECTOR = '#smb-wrap'
+exports.ITEM_SELECTOR = '.flat-card'
+exports.ID_SELECTOR = '.smb-link'
+exports.IMAGE_SELECTOR = '.card-photo img'
+exports.LIKE_SELECTOR = '.smb-watch'
+exports.REVIEW_SELECTOR = '.smb-review'
+exports.TITLE_SELECTOR = '.smb-name'
+exports.REGION_CATEGORY_SELECTOR = '.smb-region-category-text'

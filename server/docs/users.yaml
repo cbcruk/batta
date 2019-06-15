@@ -1,5 +1,5 @@
 paths:
-  /users/{userId}:
+  /users:
     get:
       tags:
         - 'users'
@@ -7,8 +7,8 @@ paths:
       produces:
         - 'application/json'
       parameters:
-        - name: 'userId'
-          in: 'path'
+        - name: 'id'
+          in: 'query'
           description: 'User ID to return'
           required: true
           type: 'string'
@@ -29,17 +29,19 @@ definitions:
         type: 'string'
       temperature:
         type: 'string'
+      desired_rate_resale:
+        type: 'string'
   Counts:
     type: 'array'
     items:
-      type: 'string'
+      type: 'integer'
   Manner:
     type: 'object'
     properties:
       content:
         type: 'string'
       count:
-        type: 'string'
+        type: 'integer'
   Review:
     type: 'object'
     properties:

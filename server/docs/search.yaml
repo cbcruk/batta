@@ -24,33 +24,33 @@ paths:
                   type: 'string'
               items:
                 $ref: '#/definitions/ArticleList'
-  /search/keywords:
-    get:
-      tags:
-        - 'search'
-      summary: 'Return keywords'
-      produces:
-        - 'application/json'
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: 'object'
-            properties:
-              keywords:
+              stores:
                 type: 'array'
                 items:
-                  $ref: '#/definitions/Keyword'
+                  $ref: '#/definitions/Store'
+              local:
+                type: 'array'
+                items:
+                  $ref: '#/definitions/Local'
 
 definitions:
-  Keyword:
+  Store:
     type: 'object'
     properties:
-      text:
-        type: 'string'
-      rank:
-        type: 'string'
-      is_down:
-        type: 'boolean'
-      is_up:
-        type: 'boolean'
+      id: string
+      image: string
+      title: string
+      region: string
+      category: string
+      like: integer
+      comment: integer
+  Local:
+    type: 'object'
+    properties:
+      id: string
+      image: string
+      title: string
+      region: string
+      price: integer
+      like: integer
+      comment: integer

@@ -1,0 +1,6 @@
+exports.REVIEWS_SELECTOR = '#reviews-list > li'
+exports.AVATAR_SELECTOR = '.review-profile-photo img'
+exports.NAME_SELECTOR = '.review-writer-nickname'
+exports.REGION_SELECTOR = '.review-writer-region-name'
+exports.CONTENT_SELECTOR = '.review-content'
+exports.TIME_SELECTOR = '.review-time'

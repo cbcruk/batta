@@ -1,0 +1,6 @@
+exports.KEYWORDS_SELECTOR = '#top-keywords-list'
+exports.KEYWORD_SELECTOR = 'li'
+exports.KEYWORD_TEXT_SELECTOR = '.keyword-text'
+exports.CHANGED_RANK_SELECTOR = '.changed_rank'
+exports.DOWN_SELECTOR = '.down'
+exports.UP_SELECTOR = '.up'

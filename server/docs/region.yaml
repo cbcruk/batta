@@ -1,5 +1,5 @@
 paths:
-  /region/:
+  /region:
     get:
       tags:
         - 'region'

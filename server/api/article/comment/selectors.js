@@ -1,0 +1,8 @@
+exports.COMMENT_SELECTOR = '#article-comments'
+exports.TOTAL_SELECTOR = 'h3'
+exports.USER_NAME_SELECTOR = '.article-comment-nickname'
+exports.USER_ID_SELECTOR = '.article-comment-nickname a'
+exports.USER_REGION_SELECTOR = '.article-comment-region-name'
+exports.DESC_SELECTOR = '.article-comment-text'
+exports.TIME_SELECTOR = '.article-comment-time'
+exports.ITEMS_SELECTOR = '.article-comment'

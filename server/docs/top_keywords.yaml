@@ -1,0 +1,31 @@
+paths:
+  /top_keywords:
+    get:
+      tags:
+        - 'search'
+      summary: 'Return keywords'
+      produces:
+        - 'application/json'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: 'object'
+            properties:
+              keywords:
+                type: 'array'
+                items:
+                  $ref: '#/definitions/Keyword'
+
+definitions:
+  Keyword:
+    type: 'object'
+    properties:
+      text:
+        type: 'string'
+      rank:
+        type: 'string'
+      is_down:
+        type: 'boolean'
+      is_up:
+        type: 'boolean'
