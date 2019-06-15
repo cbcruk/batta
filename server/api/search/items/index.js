@@ -19,11 +19,10 @@ const getItems = $ =>
       const $this = $(element)
 
       const [title, region, likeText, commentText, priceText] = [
-        IMAGE_SELECTOR,
-        LIKE_SELECTOR,
-        COMMENT_SELECTOR,
         TITLE_SELECTOR,
         REGION_SELECTOR,
+        LIKE_SELECTOR,
+        COMMENT_SELECTOR,
         PRICE_SELECTOR
       ].map(selector => getText($this.find(selector)))
       const id = $this
