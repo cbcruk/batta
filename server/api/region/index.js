@@ -12,6 +12,7 @@ const app = express()
 app.get('*', async (req, res) => {
   const { region1, region2, region3 } = req.query
   const regions = [region1, region2, region3]
+    .filter(Boolean)
     .map(r => encodeURIComponent(r))
     .join('/')
   const $ = await getHtml(`/region/${regions}`)
@@ -23,6 +24,7 @@ app.get('*', async (req, res) => {
       $(element)
         .children()
         .map((_, option) => $(option).val())
+        .toArray()
         .slice(1)
     )
   const items = getItems($, ITEMS_SELECTOR)
