@@ -14,25 +14,28 @@ const getComment = $ => {
   const $this = $(COMMENT_SELECTOR)
 
   const total = toInteger($this.find(TOTAL_SELECTOR).text())
-  const items = $this.find(ITEMS_SELECTOR).map((_, comment) => {
-    const $this = $(comment)
+  const items = $this
+    .find(ITEMS_SELECTOR)
+    .toArray()
+    .map(element => {
+      const $this = $(element)
 
-    const [user_name, user_region, desc, time] = [
-      USER_NAME_SELECTOR,
-      USER_REGION_SELECTOR,
-      DESC_SELECTOR,
-      TIME_SELECTOR
-    ].map(selector => getText($this.find(selector)))
-    const user_id = toInteger($this.find(USER_ID_SELECTOR).attr('href'))
+      const [user_name, user_region, desc, time] = [
+        USER_NAME_SELECTOR,
+        USER_REGION_SELECTOR,
+        DESC_SELECTOR,
+        TIME_SELECTOR
+      ].map(selector => getText($this.find(selector)))
+      const user_id = toInteger($this.find(USER_ID_SELECTOR).attr('href'))
 
-    return {
-      user_name,
-      user_id,
-      user_region,
-      desc,
-      time
-    }
-  })
+      return {
+        user_name,
+        user_id,
+        user_region,
+        desc,
+        time
+      }
+    })
 
   return {
     total,
