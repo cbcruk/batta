@@ -57,7 +57,7 @@ class SearchScreen extends React.Component {
   }
 
   fetchKeywords = async () => {
-    const response = await fetch('http://localhost:3000/api/search/keywords')
+    const response = await fetch('http://localhost:3000/api/top_keywords')
     const { keywords } = await response.json()
 
     this.setState(() => ({

@@ -35,7 +35,9 @@ class RegionScreen extends React.Component {
   }
 
   getAddressByKeyword = async keyword => {
-    const response = await fetch(`http://localhost:3000/api/address/${keyword}`)
+    const response = await fetch(
+      `http://localhost:3000/api/address?keyword=${keyword}`
+    )
     const data = await response.json()
 
     return data.items

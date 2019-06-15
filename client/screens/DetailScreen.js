@@ -21,7 +21,7 @@ class DetailScreen extends React.Component {
 
   fetchItem = async () => {
     const id = this.props.navigation.getParam('id', 0)
-    const response = await fetch(`http://localhost:3000/api/articles/${id}`)
+    const response = await fetch(`http://localhost:3000/api/article?id=${id}`)
     const item = await response.json()
 
     this.setState(() => ({

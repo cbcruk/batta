@@ -16,7 +16,7 @@ class UserScreen extends React.Component {
 
   fetchUser = async () => {
     const id = this.props.navigation.getParam('id', 0)
-    const response = await fetch(`http://localhost:3000/api/users/${id}`)
+    const response = await fetch(`http://localhost:3000/api/users?id=${id}`)
     const user = await response.json()
 
     this.setState(() => ({
