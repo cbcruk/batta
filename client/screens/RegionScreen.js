@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import fetchData from 'plugins/fetch'
 import Body from 'components/Base/Body'
 import SearchBar from 'components/Base/Search/SearchBar'
 import SearchResult from 'components/Base/Search/SearchResult'
@@ -26,20 +27,12 @@ class RegionScreen extends React.Component {
     })
 
   getAddressByGeo = async ({ latitude, longitude }) => {
-    const response = await fetch(
-      `http://localhost:3000/api/address?x=${longitude}&y=${latitude}`
-    )
-    const data = await response.json()
-
+    const data = await fetchData(`address?x=${longitude}&y=${latitude}`)
     return data.items
   }
 
   getAddressByKeyword = async keyword => {
-    const response = await fetch(
-      `http://localhost:3000/api/address?keyword=${keyword}`
-    )
-    const data = await response.json()
-
+    const data = await fetchData(`address?keyword=${keyword}`)
     return data.items
   }
 

@@ -1,5 +1,6 @@
 import React from 'react'
-import { ScrollView, View, Text, Button, StyleSheet } from 'react-native'
+import { ScrollView, View, Button, StyleSheet } from 'react-native'
+import fetchData from 'plugins/fetch'
 
 class DetailScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -21,8 +22,7 @@ class DetailScreen extends React.Component {
 
   fetchItem = async () => {
     const id = this.props.navigation.getParam('id', 0)
-    const response = await fetch(`http://localhost:3000/api/article?id=${id}`)
-    const item = await response.json()
+    const item = await fetchData(`article?id=${id}`)
 
     this.setState(() => ({
       item

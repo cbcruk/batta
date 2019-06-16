@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, FlatList } from 'react-native'
+import fetchData from 'plugins/fetch'
 import Body from 'components/Base/Body'
 import Item from 'components/Base/Item'
 import ItemMore from 'components/Home/ItemMore'
@@ -14,11 +15,10 @@ class HomeScreen extends React.Component {
   }
 
   fetchItems = async () => {
-    const response = await fetch('http://localhost:3000/api/articles')
-    const data = await response.json()
+    const { items } = await fetchData('articles')
 
     this.setState(() => ({
-      items: data.items
+      items
     }))
   }
 

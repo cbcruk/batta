@@ -1,5 +1,6 @@
 import React from 'react'
 import { VirtualizedList } from 'react-native'
+import fetchData from 'plugins/fetch'
 import Body from 'components/Base/Body'
 import Item from 'components/Base/Item'
 import Spinner from 'components/List/Spinner'
@@ -24,11 +25,10 @@ class ListScreen extends React.Component {
     })
 
     const endpoint = this.props.navigation.getParam('endpoint')
-    const response = await fetch(`http://localhost:3000/api/${endpoint}`)
-    const data = await response.json()
+    const { items } = await fetchData(endpoint)
 
     this.setState(() => ({
-      items: data.items,
+      items,
       fetched: false
     }))
   }

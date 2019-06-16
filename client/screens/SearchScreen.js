@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, AsyncStorage } from 'react-native'
+import fetchData from 'plugins/fetch'
 import Body from 'components/Base/Body'
 import SearchBar from 'components/Base/Search/SearchBar'
 import SearchResult from 'components/Base/Search/SearchResult'
@@ -57,8 +58,7 @@ class SearchScreen extends React.Component {
   }
 
   fetchKeywords = async () => {
-    const response = await fetch('http://localhost:3000/api/top_keywords')
-    const { keywords } = await response.json()
+    const { keywords } = await fetchData('top_keywords')
 
     this.setState(() => ({
       keywords

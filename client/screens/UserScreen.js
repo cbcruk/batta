@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollView, View, Text, StyleSheet, Button } from 'react-native'
+import fetchData from 'plugins/fetch'
 
 class UserScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -16,8 +17,7 @@ class UserScreen extends React.Component {
 
   fetchUser = async () => {
     const id = this.props.navigation.getParam('id', 0)
-    const response = await fetch(`http://localhost:3000/api/users?id=${id}`)
-    const user = await response.json()
+    const user = await fetchData(`users?id=${id}`)
 
     this.setState(() => ({
       user
