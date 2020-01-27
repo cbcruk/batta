@@ -1,0 +1,6 @@
+export const USER_SELECTOR = '#article-profile'
+export const ID_SELECTOR = '#article-profile-link'
+export const AVATAR_SELECTOR = '#article-profile-image > img'
+export const NAME_SELECTOR = '#nickname'
+export const REGION_SELECTOR = '#region-name'
+export const TEMPERATURE_SELECTOR = '#temperature-wrap dd'

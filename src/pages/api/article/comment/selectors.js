@@ -1,0 +1,8 @@
+export const COMMENT_SELECTOR = '#article-comments'
+export const TOTAL_SELECTOR = 'h3'
+export const USER_NAME_SELECTOR = '.article-comment-nickname'
+export const USER_ID_SELECTOR = '.article-comment-nickname a'
+export const USER_REGION_SELECTOR = '.article-comment-region-name'
+export const DESC_SELECTOR = '.article-comment-text'
+export const TIME_SELECTOR = '.article-comment-time'
+export const ITEMS_SELECTOR = '.article-comment'

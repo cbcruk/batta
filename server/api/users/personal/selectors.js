@@ -1,5 +1,0 @@
-exports.PERSONAL_SELECTOR = '#user-profile'
-exports.NAME_SELECTOR = '#nickname'
-exports.REGION_SELECTOR = '#region_name'
-exports.AVATAR_SELECTOR = '#profile-image > img'
-exports.TEMPERATURE_SELECTOR = '.profile-detail-count'

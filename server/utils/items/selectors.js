@@ -1,6 +1,0 @@
-exports.ID_SELECTOR = '.card-link'
-exports.IMAGE_SELECTOR = 'img'
-exports.TITLE_SELECTOR = '.card-title'
-exports.REGION_SELECTOR = '.card-region-name'
-exports.PRICE_SELECTOR = '.card-price'
-exports.COUNTS_SELECTOR = '.card-counts > span'

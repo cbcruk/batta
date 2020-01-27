@@ -1,7 +1,0 @@
-exports.ITEM_SELECTOR = '#content'
-exports.COUNTS_SELECTOR = '#article-counts'
-exports.CATEGORY_SELECTOR = '#article-category'
-exports.TITLE_SELECTOR = '#article-title'
-exports.PRICE_SELECTOR = '#article-price'
-exports.DESC_SELECTOR = '#article-detail'
-exports.IMAGES_SELECTOR = '#image-slider img'

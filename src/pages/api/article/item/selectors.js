@@ -1,0 +1,7 @@
+export const ITEM_SELECTOR = '#content'
+export const COUNTS_SELECTOR = '#article-counts'
+export const CATEGORY_SELECTOR = '#article-category'
+export const TITLE_SELECTOR = '#article-title'
+export const PRICE_SELECTOR = '#article-price'
+export const DESC_SELECTOR = '#article-detail'
+export const IMAGES_SELECTOR = '#image-slider img'

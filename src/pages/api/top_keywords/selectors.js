@@ -1,0 +1,6 @@
+export const KEYWORDS_SELECTOR = '#top-keywords-list'
+export const KEYWORD_SELECTOR = 'li'
+export const KEYWORD_TEXT_SELECTOR = '.keyword-text'
+export const CHANGED_RANK_SELECTOR = '.changed_rank'
+export const DOWN_SELECTOR = '.down'
+export const UP_SELECTOR = '.up'
