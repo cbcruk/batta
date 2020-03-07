@@ -31,4 +31,4 @@ function getUser($) {
   }
 }
 
-exports default getUser
+export default getUser
