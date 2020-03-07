@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
-import Colors from 'constants/Colors'
+import Colors from '../../../constants/Colors'
 import Price from './Price'
 import Footer from './Footer'
 
-const Item = ({ index, item, isCard, ...rest }) => {
+function Item({ index, item, isCard, ...rest }) {
   const styles = isCard ? cardStyles : mediaStyles
 
   return (
@@ -12,7 +12,11 @@ const Item = ({ index, item, isCard, ...rest }) => {
       {...rest}
       style={[styles.container, index === 0 && styles.firstItem]}
     >
-      <Image source={{ uri: item.image }} style={styles.image} />
+      <Image
+        source={{ uri: item.image, height: isCard ? 145 : 90 }}
+        resizeMode="cover"
+        style={styles.image}
+      />
       <View style={styles.body}>
         <Text
           numberOfLines={isCard ? 1 : 2}
@@ -64,6 +68,7 @@ export const cardStyles = StyleSheet.flatten([
     container: {
       flex: 1,
       width: '50%',
+      maxWidth: '50%',
       borderRadius: 5,
       marginLeft: 10
     },

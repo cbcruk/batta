@@ -1,13 +1,14 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import fetchData from 'plugins/fetch'
-import Body from 'components/Base/Body'
-import SearchBar from 'components/Base/Search/SearchBar'
-import SearchResult from 'components/Base/Search/SearchResult'
-import Item from 'components/Region/Item'
+import fetchData from '../plugins/fetch'
+import Body from '../components/Base/Body'
+import SearchBar from '../components/Base/Search/SearchBar'
+import SearchResult from '../components/Base/Search/SearchResult'
+import Item from '../components/Region/Item'
 
 class RegionScreen extends React.Component {
   state = {
+    status: 'idle',
     keyword: '',
     search: [],
     close: []
@@ -15,6 +16,12 @@ class RegionScreen extends React.Component {
 
   componentDidMount() {
     this.findAddressByGeo()
+  }
+
+  handleStatus = status => {
+    this.setState({
+      status
+    })
   }
 
   getPosition = () =>
@@ -26,19 +33,25 @@ class RegionScreen extends React.Component {
       )
     })
 
-  getAddressByGeo = async ({ latitude, longitude }) => {
-    const data = await fetchData(`address?x=${longitude}&y=${latitude}`)
-    return data.items
-  }
+  getAddress = async params => {
+    this.handleStatus('loading')
 
-  getAddressByKeyword = async keyword => {
-    const data = await fetchData(`address?keyword=${keyword}`)
-    return data.items
+    try {
+      const data = await fetchData(`address?${params}`)
+
+      this.handleStatus('success')
+
+      return data.items
+    } catch (error) {
+      this.handleStatus('failure')
+    }
   }
 
   findAddressByGeo = async () => {
-    const position = await this.getPosition()
-    const close = await this.getAddressByGeo(position.coords)
+    const {
+      coords: { longitude, latitude }
+    } = await this.getPosition()
+    const close = await this.getAddress(`x=${longitude}&y=${latitude}`)
 
     this.setState({
       close,
@@ -47,7 +60,7 @@ class RegionScreen extends React.Component {
   }
 
   findAddressByKeyword = async keyword => {
-    const search = await this.getAddressByKeyword(keyword)
+    const search = await this.getAddressByKeyword(`keyword=${keyword}`)
 
     this.setState({
       search
@@ -73,7 +86,6 @@ class RegionScreen extends React.Component {
       <Body style={styles.container}>
         <SearchBar
           onChangeText={keyword => this.setState({ keyword })}
-          onClearText={() => this.setState({ keyword: '' })}
           onSubmitEditing={() => this.findAddressByKeyword(keyword)}
         />
         <SearchResult

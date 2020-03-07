@@ -7,8 +7,8 @@ const getCurrency = number =>
     currency: 'KRW'
   }).format(number)
 
-const Price = ({ price, ...rest }) => (
-  <Text {...rest}>{isNaN(price) ? price : getCurrency(price)}</Text>
-)
+function Price({ price, ...rest }) {
+  return <Text {...rest}>{isNaN(price) ? price : getCurrency(price)}</Text>
+}
 
 export default Price

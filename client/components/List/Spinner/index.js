@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, ActivityIndicator } from 'react-native'
 
-const Spinner = props => (
-  <ActivityIndicator {...props} style={styles.container} />
-)
+function Spinner(props) {
+  return <ActivityIndicator style={styles.container} {...props} />
+}
 
 const styles = StyleSheet.create({
   container: {

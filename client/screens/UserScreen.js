@@ -1,36 +1,20 @@
 import React from 'react'
-import { ScrollView, View, Text, StyleSheet, Button } from 'react-native'
-import fetchData from 'plugins/fetch'
+import { ScrollView, View, StyleSheet } from 'react-native'
+import useOptions from '../hooks/useOptions'
+import useFetch from '../hooks/useFetch'
 
-class UserScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('title')
-  })
+function UserScreen({ route }) {
+  const { title, id } = route?.params ?? {}
 
-  state = {
-    user: {}
-  }
+  id && useFetch(`users?id=${id}`)
 
-  componentDidMount() {
-    this.fetchUser()
-  }
+  useOptions({ title })
 
-  fetchUser = async () => {
-    const id = this.props.navigation.getParam('id', 0)
-    const user = await fetchData(`users?id=${id}`)
-
-    this.setState(() => ({
-      user
-    }))
-  }
-
-  render() {
-    return (
-      <ScrollView style={styles.container}>
-        <View />
-      </ScrollView>
-    )
-  }
+  return (
+    <ScrollView style={styles.container}>
+      <View />
+    </ScrollView>
+  )
 }
 
 const styles = StyleSheet.create({

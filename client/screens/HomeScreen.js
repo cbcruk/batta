@@ -1,67 +1,62 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, FlatList } from 'react-native'
-import fetchData from 'plugins/fetch'
-import Body from 'components/Base/Body'
-import Item from 'components/Base/Item'
-import ItemMore from 'components/Home/ItemMore'
+import Body from '../components/Base/Body'
+import Item from '../components/Base/Item'
+import ItemMore from '../components/Home/ItemMore'
+import useFetch from '../hooks/useFetch'
+import Spinner from '../components/List/Spinner'
+import Logo from '../components/Logo'
 
-class HomeScreen extends React.Component {
-  state = {
-    items: []
-  }
+function HomeScreen({ navigation, route }) {
+  const { data, status } = useFetch('articles')
+  const items = data?.items ?? []
 
-  componentDidMount() {
-    this.fetchItems()
-  }
+  useEffect(() => {
+    const routeName = route.state?.routes[route.state.index]?.name ?? 'Home'
+    const isHome = routeName === 'Home'
 
-  fetchItems = async () => {
-    const { items } = await fetchData('articles')
+    navigation.setOptions({
+      headerLeft: () => (isHome ? <Logo /> : null),
+      title: ''
+    })
+  }, [])
 
-    this.setState(() => ({
-      items
-    }))
-  }
-
-  render() {
-    const { navigation } = this.props
-    const { items } = this.state
-
-    return (
-      <Body style={styles.container}>
-        <FlatList
-          data={[...items, { id: '🔑', isLast: true }].map(item => ({
-            key: item.id,
-            ...item
-          }))}
-          numColumns={2}
-          columnWrapperStyle={styles.columnWrapper}
-          renderItem={({ item }) =>
-            !item.isLast ? (
-              <Item
-                {...{ item }}
-                isCard
-                onPress={() =>
-                  navigation.navigate('Detail', {
-                    id: item.id
-                  })
-                }
-              />
-            ) : (
-              <ItemMore
-                style={{ opacity: items.length > 0 ? 1 : 0 }}
-                onPress={() =>
-                  navigation.navigate('List', {
-                    title: '인기 매물',
-                    endpoint: 'articles?is_hot=1'
-                  })
-                }
-              />
-            )
-          }
-        />
-      </Body>
-    )
-  }
+  return (
+    <Body style={styles.container}>
+      {status === 'loading' && <Spinner />}
+      <FlatList
+        data={[...items, { id: '🔑', isLast: true }].map(item => ({
+          key: item.id,
+          ...item
+        }))}
+        numColumns={2}
+        columnWrapperStyle={styles.columnWrapper}
+        renderItem={({ item }) =>
+          !item.isLast ? (
+            <Item
+              {...{ item }}
+              isCard
+              onPress={() =>
+                navigation.navigate('Detail', {
+                  id: item.id
+                })
+              }
+            />
+          ) : (
+            <ItemMore
+              style={{ opacity: items.length > 0 ? 1 : 0 }}
+              onPress={() =>
+                navigation.navigate('List', {
+                  title: '인기 매물',
+                  endpoint: 'articles?is_hot=1'
+                })
+              }
+            />
+          )
+        }
+      />
+    </Body>
+  )
 }
 
 const styles = StyleSheet.create({

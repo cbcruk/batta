@@ -1,54 +1,34 @@
 import React from 'react'
 import { ScrollView, View, Button, StyleSheet } from 'react-native'
-import fetchData from 'plugins/fetch'
+import useOptions from '../hooks/useOptions'
+import useFetch from '../hooks/useFetch'
+import Spinner from '../components/List/Spinner'
 
-class DetailScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('id', 0),
-    headerBackTitle: null
-  })
+function DetailScreen({ navigation, route }) {
+  const id = route.params?.id ?? null
+  const { data, status } = id && useFetch(`article?id=${id}`)
+  const { user } = data ?? {}
 
-  state = {
-    item: {
-      user: {
-        name: ''
-      }
-    }
-  }
+  useOptions({ title: id })
 
-  componentDidMount() {
-    this.fetchItem()
-  }
-
-  fetchItem = async () => {
-    const id = this.props.navigation.getParam('id', 0)
-    const item = await fetchData(`article?id=${id}`)
-
-    this.setState(() => ({
-      item
-    }))
-  }
-
-  render() {
-    const { navigation } = this.props
-    const { item } = this.state
-
-    return (
-      <ScrollView style={styles.container}>
+  return (
+    <ScrollView style={styles.container}>
+      {status === 'loading' && <Spinner animating />}
+      {status === 'success' && (
         <View>
           <Button
-            title={item.user.name}
+            title={user.name}
             onPress={() =>
               navigation.navigate('User', {
-                title: item.user.name,
-                id: item.user.id
+                title: user.name,
+                id: user.id
               })
             }
           />
         </View>
-      </ScrollView>
-    )
-  }
+      )}
+    </ScrollView>
+  )
 }
 
 const styles = StyleSheet.create({

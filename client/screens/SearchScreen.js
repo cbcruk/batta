@@ -1,92 +1,60 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { StyleSheet, AsyncStorage } from 'react-native'
-import fetchData from 'plugins/fetch'
-import Body from 'components/Base/Body'
-import SearchBar from 'components/Base/Search/SearchBar'
-import SearchResult from 'components/Base/Search/SearchResult'
-import Item from 'components/Search/Item'
+import Body from '../components/Base/Body'
+import SearchBar from '../components/Base/Search/SearchBar'
+import SearchResult from '../components/Base/Search/SearchResult'
+import Item from '../components/Search/Item'
+import useFetch from '../hooks/useFetch'
 
 const KEYWORD_FIELD_KEY = 'KEYWORD_FIELD_KEY'
 
-class SearchScreen extends React.Component {
-  state = {
-    keyword: '',
-    keywords: [],
-    searches: []
-  }
+function useRetrieveData() {
+  const [searches, setSearches] = useState([])
 
-  componentDidMount() {
-    this.fetchKeywords()
-    this.retrieveData()
-  }
+  useEffect(() => {
+    AsyncStorage.getItem(KEYWORD_FIELD_KEY)
+      .then(searches => setSearches(JSON.parse(searches)))
+      .catch(e => console.error(e))
+  }, [])
 
-  storeData = async keyword => {
-    try {
-      const stored = await AsyncStorage.getItem(KEYWORD_FIELD_KEY)
-      const merged = new Set([keyword, ...(stored ? JSON.parse(stored) : [])])
-      const keywords = JSON.stringify([...merged].slice(0, 10))
+  return searches
+}
 
-      AsyncStorage.setItem(KEYWORD_FIELD_KEY, keywords)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  retrieveData = async () => {
-    try {
-      const searches = await AsyncStorage.getItem(KEYWORD_FIELD_KEY)
-
-      if (searches) {
-        this.setState({
-          searches: JSON.parse(searches)
-        })
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  handleNavigate = keyword => {
-    const { navigation } = this.props
-
+function SearchScreen({ navigation }) {
+  const [keyword, setKeyword] = useState('')
+  const { data } = useFetch('top_keywords')
+  const handleNavigate = useCallback(async keyword => {
     navigation.navigate('List', {
       title: `${keyword}`,
       endpoint: `search?keyword=${keyword}`
     })
 
-    this.storeData(keyword)
-  }
+    const stored = await AsyncStorage.getItem(KEYWORD_FIELD_KEY)
+    const merged = new Set([keyword, ...(stored ? JSON.parse(stored) : [])])
+    const keywords = JSON.stringify([...merged].slice(0, 10))
 
-  fetchKeywords = async () => {
-    const { keywords } = await fetchData('top_keywords')
+    AsyncStorage.setItem(KEYWORD_FIELD_KEY, keywords)
+  }, [])
 
-    this.setState(() => ({
-      keywords
-    }))
-  }
+  useRetrieveData()
 
-  render() {
-    const { keywords, keyword } = this.state
+  return (
+    <Body style={styles.container}>
+      <SearchBar
+        onChangeText={keyword => setKeyword(keyword)}
+        onSubmitEditing={() => handleNavigate(keyword)}
+      />
 
-    return (
-      <Body style={styles.container}>
-        <SearchBar
-          onChangeText={keyword => this.setState({ keyword })}
-          onClearText={() => this.setState({ keyword: '' })}
-          onSubmitEditing={() => this.handleNavigate(keyword)}
-        />
-
-        <SearchResult
-          title="오늘의 인기 검색어"
-          items={keywords}
-          id="text"
-          renderItem={({ item }) => (
-            <Item item={item} onPress={() => this.handleNavigate(item.text)} />
-          )}
-        />
-      </Body>
-    )
-  }
+      <SearchResult
+        title="오늘의 인기 검색어"
+        items={data?.keywords ?? []}
+        id="text"
+        renderItem={({ item }) => (
+          <Item item={item} onPress={() => handleNavigate(item.text)} />
+        )}
+      />
+    </Body>
+  )
 }
 
 const styles = StyleSheet.create({

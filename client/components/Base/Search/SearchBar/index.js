@@ -1,20 +1,17 @@
 import React from 'react'
 import { StyleSheet, View, TextInput } from 'react-native'
-import Icon from 'components/Base/Icon'
+import Icon from '../../Icon'
 
-const SearchBar = props => (
-  <View style={styles.container}>
-    <View style={styles.search}>
-      <Icon name="search" size={16} color="#8e8e93" style={styles.icon} />
-      <TextInput
-        style={styles.input}
-        placeholder="Search"
-        clearButtonMode="while-editing"
-        {...props}
-      />
+function SearchBar(props) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.search}>
+        <Icon name="search" size={16} color="#8e8e93" style={styles.icon} />
+        <TextInput style={styles.input} placeholder="Search" {...props} />
+      </View>
     </View>
-  </View>
-)
+  )
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import Icon from 'components/Base/Icon'
+import Icon from '../../Icon'
 
 const icons = ['heart-empty', 'mail', 'chatboxes']
 
-const Footer = ({ counts }) => {
+function Footer({ counts }) {
   return (
     <View style={styles.container}>
       {counts

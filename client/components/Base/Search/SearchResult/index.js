@@ -8,20 +8,22 @@ import {
   Keyboard
 } from 'react-native'
 
-const SearchResult = ({ title, items, id, renderItem }) => (
-  <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      <FlatList
-        data={items}
-        keyExtractor={item => item[id]}
-        renderItem={renderItem}
-        ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
-        style={styles.list}
-      />
-    </View>
-  </TouchableWithoutFeedback>
-)
+function SearchResult({ title, items, id, renderItem }) {
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.title}>{title}</Text>
+        <FlatList
+          data={items}
+          keyExtractor={item => item[id]}
+          renderItem={renderItem}
+          ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
+          style={styles.list}
+        />
+      </View>
+    </TouchableWithoutFeedback>
+  )
+}
 
 export const styles = StyleSheet.create({
   container: {
